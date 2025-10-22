@@ -1,39 +1,41 @@
 #include<bits/stdc++.h>
 
-int isPrime[10000005];
+bool isPrime[10000005];
 
 int main()
 {
-    for (int i = 0; i < 10000004; i++)
+    for (int i = 2; i*i < 10000001 ; i++)
     {
-        isPrime[i] = 1;
-    }
-    for (int i = 2; 2*i < 10000004 ; i++)
-    {
-        for (int j = 2*i; j < 10000004 ; j += i)
+        if(!isPrime[i])
         {
-            isPrime[j] = 0;
+
+            for (int j = i*i; j < 10000001 ; j += i)
+            {
+                isPrime[j] = 1;
+            }
+
         }
-        
     }
-    isPrime[1] = 0;
-    isPrime[2] = 1;
+    isPrime[2] = 0;
+
+
+
     int n,num;
     std::cin >> n;
     while (n--)
     {
-        std::cin >> num;
+        scanf("%d",&num);
         if(isPrime[num])
         {
-            std::cout << "YES ";
+            printf("NO ");
         }
         else
         {
-            std::cout << "NO ";
+            printf("YES ");
         }
     }
     
-    
+    return 0;
 
     
 }
