@@ -1,18 +1,51 @@
-//#include<bits/stdc++.h>
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
+
+string str;
 int main()
 {
-    freopen("1.in","r",stdin);
-    int num,c;
-    while((c = getchar()) != EOF)
+    long long pos = -1,len = 0;
+    while (getline(cin,str))
     {
-        if(c != 10 && c != 32)
+ 
+        pos = str.find(' ');
+        while (pos != -1)
         {
-            num ++;
+            str.erase(pos,1);
+            pos = str.find(' ');
         }
+        pos = str.find('\n');
+        while (pos != -1)
+        {
+            str.erase(pos,1);
+            pos = str.find('\n');
+        }
+        
+        len += str.length();
+
     }
-    cout << num;
+
+    cout << len;
+
     return 0;
-    //system("pause");
+
 }
+
+
+/*
+想复杂了
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int ans=0;
+    char c;
+    if(cin>>c)ans++; //cin自动去除空格换行
+    if(cin>>c)ans++; //cin在读不到数据时返回0
+    if(cin>>c)ans++;
+    if(cin>>c)ans++;
+    if(cin>>c)ans++;
+    cout<<ans;
+}
+
+*/
