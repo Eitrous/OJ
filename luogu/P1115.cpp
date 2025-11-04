@@ -1,27 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 200005;
-int A[N],S[N];
+const long long N = 200005;
+
 
 int main()
 {
-    int n,max = -10000;
-    cin >> n;
-    for (int i = 0; i < n; i++)
+    long long n,sum,a,max;
+    cin >> n >> sum;
+    max = sum;
+    for (int i = 2; i <= n; i++)
     {
-        cin >> A[i];
-        S[i] = S[i-1] + A[i];
-    }
-    
-    for (int i = 1; i < n; i++)
-    {
-        for (int j = 0; j < i; j++)
-        {
-            if(max < S[i]-S[j] ) max = S[i]-S[j];
+        cin >> a;
+        sum += a;
+        if(sum < 0){
+            max = (max > a ? max : a);
+            sum = 0;
         }
-        
+        else max = (max > sum ? max : sum);
     }
-    
+
     cout << max;
 
     return 0;
