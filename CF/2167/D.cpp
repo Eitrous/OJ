@@ -1,48 +1,59 @@
 #include<bits/stdc++.h>
 using namespace std;
-unsigned long long ary[100005];
+const long long N = 2e5 + 7;
+vector<long long> pri;
+bool num[N];
+
+void init()
+{
+    for (long long i = 2; i < N; i++)
+    {
+        if(!num[i]) pri.push_back(i);
+        for (auto x : pri)
+        {
+            if(i * x >= N) break;
+            num[i * x] = 1;
+            if(i % x == 0) break;
+        }
+    }
+    
+}
+
 
 int main()
 {
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
-    int t,n,flag = 1;
+    init();
+    long long t,n,tmp,g;
     cin >> t;
     while (t--)
     {
         cin >> n;
-        for (int i = 0; i < n; i++)
+        g = 0;
+        for (long long i = 0; i < n; i++)
         {
-            cin >> ary[i];
+            cin >> tmp;
+            g = gcd(g,tmp);
         }
-        
-        sort(ary,ary+n);
-        int len = unique(ary,ary+n) - ary;
-        
-        for (int i = 0; i < n; i++)
+
+        for (auto x : pri)
         {
-            if(ary[i] %2)
+            if(g % x)
             {
-                flag = 0;
+                cout << x << '\n';
                 break;
             }
         }
-        
-        if(flag == 0) 
-        {
-            cout << 2 << endl;
-            continue;
-        }
-        else
-        {
-            for (int i = 0; i < n; i++)
-            {
-                if(ary)
-            }
-            
-        }
-
     }
-
     return 0;
-    
 }
+/*
+记得开long long
+记得开long long
+记得开long long
+记得开long long
+记得开long long
+记得开long long
+记得开long long
+记得开long long
+*/
