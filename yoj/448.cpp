@@ -1,3 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string num,word;
+    getline(cin,num);
+    //getchar();
+    getline(cin,word);
+    cout << num << '\n' << word;
+    return 0;
+}
+
+/*
+
 #include<stdio.h>
 using namespace std;
 int main()
@@ -10,3 +24,5 @@ int main()
     printf("%s%s", num ,str);
     return 0;
 }
+    
+*/
