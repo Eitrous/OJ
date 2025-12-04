@@ -4,13 +4,20 @@
 #include <iostream>
 using namespace std;
 //____qcodep____
-
+#include<bits/stdc++.h>
+char substr[220];
 char *checkSubstr(char *s1,char *s2)
-{
+{   
+    
     int len1 = strlen(s1),len2 = strlen(s2);
+    sort(s1,s1+len1);
     if(len1 > len2) return NULL;
-    qsort(s1,len1,sizeof(char));
-
+    for(int i = 0; i+len1 <= len2; i++){
+        strncpy(substr, s2+i,len1);
+        sort(substr,substr+len1);
+        if(!strcmp(s1,substr)) return s2+i;
+    }
+    return NULL;
 }
 
 int main()

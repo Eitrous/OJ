@@ -6,17 +6,10 @@ int pro[N],aft[N];
 
 signed main()
 {
-	int n;cin >> n;
-	for(int i = 0 ; i < n ; i++) cin >> pro[i];
-	int tmp,p;
-	for(int i = 0 ; i<n ; i++){
-		aft[i] = pro[i];
-		p = i;
-		while(p != 0 && aft[p] < aft[p-1] ){
-			swap(aft[p],aft[p-1]);
-			p--;
-		}
-	}
-	for(int i = 0 ; i < n ; i++) cout << aft[i] << ' ';
-	return 0;
+	string s1 = "ecccfcwkojcdljkmmaknqweffkmnwcqcqfkkweescbddewcmwijeabwwkwecdqnndnelqlwwllnqwmdsnlcenbmdkkdvlnkalqsklhlncslqcqensan";
+	sort(s1.begin(),s1.end());
+	string s3 = "snioaedjklwqnedkwhbekfjlwqsncqsnmdlqswmdwejkdcnlkwqnmsclmelmqlndckqwbedckalnckweldfcnkancklwnlemfcbcnkwqacwqefcwecv";
+	sort(s3.begin(),s3.end());
+	cout << s1 <<endl;
+	cout << s3;
 }
