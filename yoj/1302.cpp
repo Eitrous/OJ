@@ -7,7 +7,20 @@ using namespace std;
 
 void solve()
 {
-
+    int n, tmp, q, l, r;
+    vector<int> a;
+    cin >> n;
+    for (int i = 0; i < n; ++i){
+        cin >> tmp;
+        a.push_back(tmp);
+    }
+    cin >> q;
+    while (q--){
+        cin >> l >> r;
+        sort(a.begin()+l, a.begin()+r+1);
+    }
+    for (int i = 0; i < n; ++i)
+        cout << a[i] << ' ';
 }
 
 signed main()

@@ -7,7 +7,10 @@ using namespace std;
 
 void solve()
 {
-
+    double p, sum = 0;
+    int n;
+    cin >> p >> n;
+    cout << fixed << setprecision(2) << p * (n - n/2) + (p/2) * (n/2);
 }
 
 signed main()
@@ -16,7 +19,6 @@ signed main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
     #endif
-    
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     int _ = 1;
     //cin >> _;
