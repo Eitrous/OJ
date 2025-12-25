@@ -1,94 +1,103 @@
 #include<bits/stdc++.h>
+#define endl '\n'
+#define int long long
+#define FOR(i,a,b) for (int i = (a); i < (b); ++i)
 using namespace std;
 
-char value[5] = "JQKA";
-char type[5] = "HDCS";
+string v[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+char t[4] = {'H', 'D', 'C', 'S'};
 
-struct Poker{
-    char type = ' ';
-    int value = 0;
-    int typeno = -1;
-    bool mstus = false;
-}poker[8];
+//const int N = 1e5 + 10;
+struct Poker
+{
+    int val;
+    char type;
+};
 
+Poker base[2], pub[5];
 
-int main(){
-    int n;cin >> n;
-    int pos = 0,no;
-    string str;
-    while (n--){
-        //输入
-        getchar();
-        pos = 0,no = 1;
-        getline(cin,str);
-        str += "   ";
-        while (pos < str.length()){
-            if(no <= 2) poker[no].mstus = true;
-            poker[no].type = str[pos];
-            for(int i = 0; i < 4; i++){
-                if(poker[no].type == type[i]) poker[no].typeno = i;
-                break;
-            }
-            pos++;
-            if(str[pos] > '9'){
-                for (int i = 0; i < 4; i++){
-                    if(str[pos] == value[i]) {
-                        poker[no].value = 11+i;
-                        pos++;
-                        break;
-                    }
-                }
-            }
-            else{
-                poker[no].value = str[pos]-'0';
-                pos++;
-                if(str[pos] != ' '){
-                    poker[no].value *= 10;
-                    pos++;
-                }
-            }
-            pos++;
-            no++;
+string check(int a, int b, int c)
+{
+    bool TH = false, SZ = true;
+    char typ = base[0].type;
+    int esu[3] = {a, b, c};
+
+    if (typ == base[1].type){
+        TH = true;
+        for (int i = 0; i < 3; ++i){
+            if (typ != pub[esu[i]].type)
+                TH = false;
         }
-
-        //处理
-        int valuecnt[15][8] = {{0}},typcnt[5][8] = {{0}};
-        char th_typ = poker[1].type;
-        bool is_th = true,is_sz = false,is_ths = false;
-
-        if(poker[2].type != th_typ) is_th = false;
-
-        for (int i = 1; i <= 7; i++){
-            valuecnt[poker[i].value][0]++;
-            valuecnt[poker[i].value][valuecnt[poker[i].value][0]] = i;
-            typcnt[poker[i].typeno][0]++;
-            typcnt[poker[i].typeno][typcnt[poker[i].typeno][0]] = i;
-        }
-
-        for (int i = 1; i <= 3; i++){
-            bool judge = true;
-            for (int j = i; j <= i+3; j++){
-                if(valuecnt[j][0] != valuecnt[j+1][0] - 1) judge = false;
-            }
-            if(judge){//当可能有sz时
-                //判断有无必用牌
-                bool is_mst = false;
-                for (int j = i; j <= i+4; j++)
-                {
-                    if()
-                }
-                
-                for (int j = i; j <= i+4; j++)
-                {
-                    
-                }
-                
-            }
-        }
-        
-        
-        
-
     }
+
+    int val[5] = {base[0].val, base[1].val, pub[a].val, pub[b].val, pub[c].val};
+    sort(val, val+5);
+    FOR(i, 1, 4){
+        if (val[i] != val[i-1]+1)
+            SZ = false;
+    }
+    if (SZ){
+        if (val[4] == val[3]+1 || (val[4] == 14 && val[0] == 2))
+            SZ = true;
+        else
+            SZ = false;
+    }
+
+    if (TH && SZ)
+        return "THS";
+    else if (TH)
+        return "TH";
+    else if (SZ)
+        return "SZ";
+    else
+        return "GP";
+}
+
+void solve()
+{
+    string tmp;
+    FOR(i, 0, 2){
+        cin >> tmp;
+        base[i].type = tmp[0];
+        tmp = tmp.substr(1);
+        FOR(j, 0, 13){
+            if (tmp == v[j])
+                base[i].val = j+2;
+        }
+    }
+    FOR(i, 0, 5){
+        cin >> tmp;
+        pub[i].type = tmp[0];
+        tmp = tmp.substr(1);
+        FOR(j, 0, 13){
+            if (tmp == v[j])
+                pub[i].val = j+2;
+        }
+    }
+
+    string permu = "GP";
+    FOR(i, 0, 5){
+        FOR(j, i+1, 5){
+            FOR(k, j+1, 5){
+                permu = max(permu, check(i, j, k));
+            }
+        }
+    }
+
+    cout << permu << endl;
+}
+
+signed main()
+{
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif
+    
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    int _ = 1;
+    cin >> _;
+    while (_--)
+        solve();
     return 0;
 }
